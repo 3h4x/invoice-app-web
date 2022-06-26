@@ -1,41 +1,27 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
-import { Box } from '@mui/material'
+import { Box, Container, CssBaseline } from '@mui/material'
 import Head from 'next/head'
+
+import { ClientsTableContainer } from './src/api/clients/ClientsTableContainer'
+import { ErrorBoundary } from './src/common/ErrorBoundary'
 
 import type { NextPage } from 'next'
 
 const Home: NextPage = () => {
   const [toggle, setToggle] = useState(false)
-  useEffect(() => {
-    fetch('http://localhost:3139/clients', {
-      headers: {
-        'x-access-token': '111',
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((httpResponse) => {
-        if (httpResponse.status !== 200) {
-          return Promise.reject
-        }
-        console.log('fetched')
-      })
-      .then((jsonResponse) => {
-        console.log(jsonResponse)
-      })
-      .catch((err) => {
-        console.log('catch')
-      })
-  }, [])
 
   return (
-    // <ErrorBoundary>
-    <Box>
-      <Head>
-        <title>Invoice Application</title>
-        <meta name='description' content='This is next generation invoice application' />
-      </Head>
-      {/* <Button variant='contained'
+    <Container component='main' maxWidth='xl'>
+      <CssBaseline />
+      <Box sx={{ display: 'grid' }}>
+        <ErrorBoundary>
+          <Head>
+            <title>Invoice Application</title>
+            <meta name='description' content='This is next generation invoice application' />
+          </Head>
+          <ClientsTableContainer />
+          {/* <Button variant='contained'
         onClick={() => { setToggle(!toggle) }}>Hello World</Button>
         {toggle ? (
             <ErrorBoundary scope='clients' errorComponent={(<div>Error</div>)>
@@ -43,8 +29,9 @@ const Home: NextPage = () => {
             </ErrorBoundary>
         ) : null
       } */}
-    </Box>
-    // </ErrorBoundry>
+        </ErrorBoundary>
+      </Box>
+    </Container>
   )
 }
 
