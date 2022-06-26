@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const invoiceAPI = axios.create({
-  baseURL: `${process.env.NEXT_PUBLIC_API_URL}`,
+  baseURL: `${process.env.NEXT_PUBLIC_BACKEND_URL}`,
   headers: {
     'x-access-token': '111',
     'Content-Type': 'application/json',

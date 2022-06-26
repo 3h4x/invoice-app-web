@@ -5,11 +5,13 @@ import Head from 'next/head'
 
 import { ClientsTableContainer } from './src/api/clients/ClientsTableContainer'
 import { ErrorBoundary } from './src/common/ErrorBoundary'
+import Login from './src/login'
 
 import type { NextPage } from 'next'
 
 const Home: NextPage = () => {
   const [toggle, setToggle] = useState(false)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   return (
     <Container component='main' maxWidth='xl'>
@@ -20,7 +22,7 @@ const Home: NextPage = () => {
             <title>Invoice Application</title>
             <meta name='description' content='This is next generation invoice application' />
           </Head>
-          <ClientsTableContainer />
+          {isAuthenticated ? <ClientsTableContainer /> : <Login />}
           {/* <Button variant='contained'
         onClick={() => { setToggle(!toggle) }}>Hello World</Button>
         {toggle ? (
