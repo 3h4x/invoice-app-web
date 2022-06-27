@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 
 export const backendAPI = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_BACKEND_URL}`,
@@ -62,12 +62,13 @@ export const UserAPI = {
         return res
       },
       (err) => {
-        if (err.response.status === 403 || err.response.status === 401) {
+        if (err instanceof AxiosError && err.response?.data === 'Invalid token') {
           handleTokenExpired()
         }
       },
     )
   },
+
   login: async (params: { email: string; password: string }) => {
     const loginResponse = await backendAPI.post<UserAPILoginResponse>('/login', {
       email: params.email,
