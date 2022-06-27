@@ -2,8 +2,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Prerequesits
 
-Install `pre-commit`
-`pre-commit install --hook-type commit-msg`
+Install `pre-commit` and add hook `pre-commit install --hook-type commit-msg`
 
 ## Getting Started
 

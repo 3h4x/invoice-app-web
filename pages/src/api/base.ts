@@ -49,11 +49,20 @@ type UserAPILoginResponse = {
 }
 
 export const UserAPI = {
+  setupAPIToken: (token: string) => {
+    backendAPI.interceptors.request.use((req) => {
+      if (!req.headers) {
+        req.headers = {}
+      }
+      req.headers['x-access-token'] = token
+      return req
+    })
+  },
   login: async (params: { email: string; password: string }) => {
     const loginResponse = await backendAPI.post<UserAPILoginResponse>('/login', {
       email: params.email,
       password: params.password,
     })
-    return loginResponse.data 
+    return loginResponse.data
   },
 }

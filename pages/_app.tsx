@@ -1,5 +1,9 @@
+import { useState, useEffect } from 'react'
+
 import { blue, teal } from '@mui/material/colors'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+
+import { AuthContextProvider } from './src/auth/AuthContex'
 
 import type { AppProps } from 'next/app'
 
@@ -15,9 +19,17 @@ const theme = createTheme({
 })
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+
+  useEffect(() => {
+    console.log(isAuthenticated)
+  }, [isAuthenticated, setIsAuthenticated])
+
   return (
     <ThemeProvider theme={theme}>
-      <Component {...pageProps} />
+      <AuthContextProvider value={[isAuthenticated, setIsAuthenticated]}>
+        <Component {...pageProps} />
+      </AuthContextProvider>
     </ThemeProvider>
   )
 }
