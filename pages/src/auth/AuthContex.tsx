@@ -16,7 +16,7 @@ export const AuthContext = createContext<null | {
   userAuthToken: string | null
   login: (params: LoginParams) => unknown
   setAuthToken: (token: string) => unknown
-  // logout: () => unknown
+  logout: () => unknown
 }>(null)
 
 export const AuthContextProvider = (props: { children: ReactNode }) => {
@@ -62,10 +62,13 @@ export const AuthContextProvider = (props: { children: ReactNode }) => {
         userAuthToken,
         login: (params: LoginParams) => {
           console.log(params)
-          execute(params)
+          execute(params).then( (response ) => {
+            console.log(response)
+          })
         },
         setAuthToken: persistToken,
         // logout: handleLogout(),
+        logout: () => {},
       }}>
       {props.children}
     </AuthContext.Provider>
@@ -74,9 +77,9 @@ export const AuthContextProvider = (props: { children: ReactNode }) => {
 
 export const useAuthContext = () => {
   const context = useContext(AuthContext)
-  // if (context === null) {
-  //   throw new Error('useAuthContext must be used within a AuthContextProvider')
-  // }
+  if (context === null) {
+    throw new Error('useAuthContext must be used within a AuthContextProvider')
+  }
 
   return context
 }

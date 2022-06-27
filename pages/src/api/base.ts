@@ -3,7 +3,6 @@ import axios from 'axios'
 export const backendAPI = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_BACKEND_URL}`,
   headers: {
-    'x-access-token': '111',
     'Content-Type': 'application/json',
   },
 })
@@ -74,6 +73,7 @@ export const UserAPI = {
       email: params.email,
       password: params.password,
     })
+
     return loginResponse.data
   },
 }
