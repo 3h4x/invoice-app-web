@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
+import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from 'react'
 
 import { getCookie, removeCookies, setCookies } from 'cookies-next'
 
@@ -16,19 +16,20 @@ export const AuthContextProvider = (props: { children: ReactNode }) => {
   const [userAuthToken, setAuthToken] = useState<string | null>(null)
   const [isContextInitialized, setIsContextInitialized] = useState(false)
 
-  const handleLogout = () => {
-    setAuthToken(null)
-    removeCookies(AUTH_COOKIE_NAME)
-  }
-
   const persistToken = (token: string) => {
     setAuthToken(token)
     setCookies(AUTH_COOKIE_NAME, token)
   }
 
+  const handleLogout = () => {
+    // TODO: add toaster
+    setAuthToken(null)
+    removeCookies(AUTH_COOKIE_NAME)
+  }
+
   useEffect(() => {
     if (userAuthToken) {
-      UserAPI.setupAPIToken(userAuthToken, () => {})
+      UserAPI.setupAPIToken(userAuthToken, handleLogout)
       setIsContextInitialized(true)
     }
   }, [userAuthToken])
@@ -37,26 +38,31 @@ export const AuthContextProvider = (props: { children: ReactNode }) => {
     const cookieToken = getCookie(AUTH_COOKIE_NAME)?.toString()
     if (cookieToken) {
       setAuthToken(cookieToken)
-      UserAPI.setupAPIToken(cookieToken, () => {})
+    } else {
+      setIsContextInitialized(true)
     }
-    setIsContextInitialized(true)
   }, [])
+
+  const contextValue = useMemo(
+    () => ({
+      userAuthToken,
+      setAuthToken: persistToken,
+      logout: handleLogout,
+    }),
+    [userAuthToken],
+  )
+
+  if (!isContextInitialized) {
+    return null
+  }
 
   if (!isContextInitialized) {
     // spinner
     console.log('loading')
+    return null
   }
 
-  return (
-    <AuthContext.Provider
-      value={{
-        userAuthToken,
-        setAuthToken: persistToken,
-        logout: handleLogout,
-      }}>
-      {props.children}
-    </AuthContext.Provider>
-  )
+  return <AuthContext.Provider value={contextValue}>{props.children}</AuthContext.Provider>
 }
 
 export const useAuthContext = () => {
