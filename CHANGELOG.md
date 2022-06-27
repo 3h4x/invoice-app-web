@@ -1,4 +1,13 @@
-# 0.2.0 (2022-06-27)
+## [0.2.1](https://github.com/3h4x/toptal-invoice-web/compare/v0.2.0...v0.2.1) (2022-06-27)
+
+
+### Reverts
+
+* Revert "Layout, design and more auth (#3)" ([3b6e11e](https://github.com/3h4x/toptal-invoice-web/commit/3b6e11e53dbe403d9a47ffe8bd11427204d06d11)), closes [#3](https://github.com/3h4x/toptal-invoice-web/issues/3)
+
+
+
+# [0.2.0](https://github.com/3h4x/toptal-invoice-web/compare/24bd0ee54186962cc2e0a62a59d2fa474c79fb64...v0.2.0) (2022-06-27)
 
 
 ### Features
