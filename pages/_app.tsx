@@ -27,9 +27,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <ThemeProvider theme={theme}>
-      <AuthContextProvider value={[isAuthenticated, setIsAuthenticated]}>
+      {/* <AuthContextProvider value={[isAuthenticated, setIsAuthenticated]}> */}
         <Component {...pageProps} />
-      </AuthContextProvider>
+      {/* </AuthContextProvider> */}
     </ThemeProvider>
   )
 }

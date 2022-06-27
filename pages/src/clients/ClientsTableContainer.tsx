@@ -1,10 +1,17 @@
-import { useAsync } from '../utils/useAsync'
+import { useEffect } from 'react'
+
 import { fetchClients } from '../api/base'
+import { useAsync } from '../utils/useAsync'
 
 import { ClientsTable } from './ClientsTable'
 
 export const ClientsTableContainer = () => {
-  const { status, value, error } = useAsync(fetchClients, true)
+  const { execute, status, value, error } = useAsync(fetchClients)
+
+  useEffect(() => {
+    execute(undefined)
+  }, [])
+
   if (status === 'idle' || status === 'pending') {
     return <div>Loading</div>
   }
