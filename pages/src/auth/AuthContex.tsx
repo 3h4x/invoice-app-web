@@ -1,13 +1,8 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
 
-import { getCookie, setCookies } from 'cookies-next'
+import { getCookie, removeCookies, setCookies } from 'cookies-next'
 
 import { UserAPI } from '../api/base'
-
-type LoginParams = {
-  email: string
-  password: string
-}
 
 const AUTH_COOKIE_NAME = 'auth-token'
 
@@ -19,6 +14,12 @@ export const AuthContext = createContext<null | {
 
 export const AuthContextProvider = (props: { children: ReactNode }) => {
   const [userAuthToken, setAuthToken] = useState<string | null>(null)
+  const [isContextInitialized, setIsContextInitialized] = useState(false)
+
+  const handleLogout = () => {
+    setAuthToken(null)
+    removeCookies(AUTH_COOKIE_NAME)
+  }
 
   const persistToken = (token: string) => {
     setAuthToken(token)
@@ -27,7 +28,8 @@ export const AuthContextProvider = (props: { children: ReactNode }) => {
 
   useEffect(() => {
     if (userAuthToken) {
-      UserAPI.setupAPIToken(userAuthToken)
+      UserAPI.setupAPIToken(userAuthToken, () => {})
+      setIsContextInitialized(true)
     }
   }, [userAuthToken])
 
@@ -35,12 +37,14 @@ export const AuthContextProvider = (props: { children: ReactNode }) => {
     const cookieToken = getCookie(AUTH_COOKIE_NAME)?.toString()
     if (cookieToken) {
       setAuthToken(cookieToken)
-      UserAPI.setupAPIToken(cookieToken)
+      UserAPI.setupAPIToken(cookieToken, () => {})
     }
+    setIsContextInitialized(true)
   }, [])
 
-  if (!userAuthToken) {
-    return <div>Not authenticated</div>
+  if (!isContextInitialized) {
+    // spinner
+    console.log('loading')
   }
 
   return (
@@ -48,9 +52,7 @@ export const AuthContextProvider = (props: { children: ReactNode }) => {
       value={{
         userAuthToken,
         setAuthToken: persistToken,
-        logout: () => {
-          console.log('logout')
-        },
+        logout: handleLogout,
       }}>
       {props.children}
     </AuthContext.Provider>

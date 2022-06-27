@@ -3,7 +3,6 @@ import axios from 'axios'
 export const backendAPI = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_BACKEND_URL}`,
   headers: {
-    'x-access-token': '111',
     'Content-Type': 'application/json',
   },
 })
@@ -49,7 +48,7 @@ type UserAPILoginResponse = {
 }
 
 export const UserAPI = {
-  setupAPIToken: (token: string) => {
+  setupAPIToken: (token: string, handleTokenExpired: () => unknown) => {
     backendAPI.interceptors.request.use((req) => {
       if (!req.headers) {
         req.headers = {}
@@ -57,12 +56,24 @@ export const UserAPI = {
       req.headers['x-access-token'] = token
       return req
     })
+
+    backendAPI.interceptors.response.use(
+      (res) => {
+        return res
+      },
+      (err) => {
+        if (err.response.status === 403 || err.response.status === 401) {
+          handleTokenExpired()
+        }
+      },
+    )
   },
   login: async (params: { email: string; password: string }) => {
     const loginResponse = await backendAPI.post<UserAPILoginResponse>('/login', {
       email: params.email,
       password: params.password,
     })
+
     return loginResponse.data
   },
 }
