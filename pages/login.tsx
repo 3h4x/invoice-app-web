@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 import { useRouter } from 'next/router'
 
@@ -6,10 +6,8 @@ import { useAuthContext } from './src/auth/AuthContex'
 import LoginFormContainer from './src/auth/LoginFormContainer'
 
 export default function Login() {
-  const router = useRouter()
   const { userAuthToken } = useAuthContext()
-
-  const [toggle, setToggle] = useState(false)
+  const router = useRouter()
 
   useEffect(() => {
     if (userAuthToken) {
@@ -17,8 +15,8 @@ export default function Login() {
     }
   }, [userAuthToken])
 
-  if (!userAuthToken) {
-    console.log('loading')
+  if (userAuthToken) {
+    return null
   }
 
   return <LoginFormContainer />
