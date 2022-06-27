@@ -1,34 +1,42 @@
-import { Box, Container, CssBaseline } from '@mui/material'
-import Head from 'next/head'
+import { useEffect, useState } from 'react'
 
-import { AuthGuard } from './src/auth/AuthGuard'
+import { Box, Button, Container, CssBaseline } from '@mui/material'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+
+import { useAuthContext } from './src/auth/AuthContex'
 import { ClientsTableContainer } from './src/clients/ClientsTableContainer'
 import { ErrorBoundary } from './src/common/ErrorBoundary'
-import PrimarySearchAppBar from './src/layout/AppBar'
 
 import type { NextPage } from 'next'
 
 const Home: NextPage = () => {
+  const router = useRouter()
+
+  const [toggle, setToggle] = useState(false)
+
+  const { logout, userAuthToken } = useAuthContext()
+
+  useEffect(() => {
+    if (!userAuthToken) {
+      router.push('/login')
+    }
+  }, [userAuthToken])
+
   return (
-    <AuthGuard>
-      <ErrorBoundary>
-        <Box sx={{ display: 'flex' }}>
-          <CssBaseline />
+    <Container component='main' maxWidth='xl'>
+      <CssBaseline />
+      <Box sx={{ display: 'grid' }}>
+        <ErrorBoundary>
           <Head>
-            <title>Awesome Invoice App</title>
+            <title>Invoice Application</title>
             <meta name='description' content='This is next generation invoice application' />
           </Head>
-          <Box sx={{ flexGrow: 1 }}>
-            <PrimarySearchAppBar />
-            <main>
-              <Container sx={{ py: 8 }} maxWidth='md'>
-                <ClientsTableContainer />
-              </Container>
-            </main>
-          </Box>
-        </Box>
-      </ErrorBoundary>
-    </AuthGuard>
+          <Button onClick={() => logout()}>Logout</Button>
+          <ClientsTableContainer />
+        </ErrorBoundary>
+      </Box>
+    </Container>
   )
 }
 
