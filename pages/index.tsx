@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 
-import { Box, Container, CssBaseline } from '@mui/material'
+import { Box, Button, Container, CssBaseline } from '@mui/material'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
 import { useAuthContext } from './src/auth/AuthContex'
+import { ClientsTableContainer } from './src/clients/ClientsTableContainer'
 import { ErrorBoundary } from './src/common/ErrorBoundary'
 
 import type { NextPage } from 'next'
@@ -31,6 +32,8 @@ const Home: NextPage = () => {
             <title>Invoice Application</title>
             <meta name='description' content='This is next generation invoice application' />
           </Head>
+          <Button onClick={() => logout()}>Logout</Button>
+          <ClientsTableContainer />
         </ErrorBoundary>
       </Box>
     </Container>
