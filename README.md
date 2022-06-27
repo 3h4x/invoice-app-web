@@ -1,5 +1,10 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Prerequesits
+
+Install `pre-commit`
+`pre-commit install --hook-type commit-msg`
+
 ## Getting Started
 
 First, run the development server:
