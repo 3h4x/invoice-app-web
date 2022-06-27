@@ -17,6 +17,7 @@ export const AuthContextProvider = (props: { children: ReactNode }) => {
   const [isContextInitialized, setIsContextInitialized] = useState(false)
 
   const handleLogout = () => {
+    // TODO: add toaster
     setAuthToken(null)
     removeCookies(AUTH_COOKIE_NAME)
   }
@@ -28,7 +29,7 @@ export const AuthContextProvider = (props: { children: ReactNode }) => {
 
   useEffect(() => {
     if (userAuthToken) {
-      UserAPI.setupAPIToken(userAuthToken, () => {})
+      UserAPI.setupAPIToken(userAuthToken, handleLogout)
       setIsContextInitialized(true)
     }
   }, [userAuthToken])
@@ -37,9 +38,9 @@ export const AuthContextProvider = (props: { children: ReactNode }) => {
     const cookieToken = getCookie(AUTH_COOKIE_NAME)?.toString()
     if (cookieToken) {
       setAuthToken(cookieToken)
-      UserAPI.setupAPIToken(cookieToken, () => {})
+    } else {
+      setIsContextInitialized(true)
     }
-    setIsContextInitialized(true)
   }, [])
 
   if (!isContextInitialized) {

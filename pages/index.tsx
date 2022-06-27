@@ -23,6 +23,10 @@ const Home: NextPage = () => {
     }
   }, [userAuthToken])
 
+  if (!userAuthToken){
+    return null
+  }
+
   return (
     <Container component='main' maxWidth='xl'>
       <CssBaseline />
