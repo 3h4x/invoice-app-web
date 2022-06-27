@@ -3,9 +3,9 @@ import { useState } from 'react'
 import { Box, Container, CssBaseline } from '@mui/material'
 import Head from 'next/head'
 
-import { ClientsTableContainer } from './src/api/clients/ClientsTableContainer'
+import Login from './src/auth/LoginFormCoitainer'
+import { ClientsTableContainer } from './src/clients/ClientsTableContainer'
 import { ErrorBoundary } from './src/common/ErrorBoundary'
-import Login from './src/login'
 
 import type { NextPage } from 'next'
 

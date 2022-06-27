@@ -1,5 +1,5 @@
-import { useAsync } from '../../utils/useAsync'
-import { fetchClients } from '../base'
+import { useAsync } from '../utils/useAsync'
+import { fetchClients } from '../api/base'
 
 import { ClientsTable } from './ClientsTable'
 

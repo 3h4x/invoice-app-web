@@ -12,7 +12,7 @@ import Link from '@mui/material/Link'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
-export default function Login() {
+export default function LoginForm() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
@@ -21,6 +21,8 @@ export default function Login() {
       password: data.get('password'),
     })
   }
+
+  const login = useAuthContext()
 
   return (
     <>
