@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
+import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from 'react'
 
 import { getCookie, removeCookies, setCookies } from 'cookies-next'
 
@@ -43,22 +43,26 @@ export const AuthContextProvider = (props: { children: ReactNode }) => {
     }
   }, [])
 
+  const contextValue = useMemo(
+    () => ({
+      userAuthToken,
+      setAuthToken: persistToken,
+      logout: handleLogout,
+    }),
+    [userAuthToken],
+  )
+
+  if (!isContextInitialized) {
+    return null
+  }
+
   if (!isContextInitialized) {
     // spinner
     console.log('loading')
     return null
   }
 
-  return (
-    <AuthContext.Provider
-      value={{
-        userAuthToken,
-        setAuthToken: persistToken,
-        logout: handleLogout,
-      }}>
-      {props.children}
-    </AuthContext.Provider>
-  )
+  return <AuthContext.Provider value={contextValue}>{props.children}</AuthContext.Provider>
 }
 
 export const useAuthContext = () => {
