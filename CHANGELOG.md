@@ -1,3 +1,15 @@
+# [0.3.0](https://github.com/3h4x/toptal-invoice-web/compare/v0.2.1...v0.3.0) (2022-06-27)
+
+
+### Features
+
+* adding auth guards ([d81aa58](https://github.com/3h4x/toptal-invoice-web/commit/d81aa58a3f43180084e14e8bd9d31801dd2bac09))
+* contextValue in useMemo ([7e93b8b](https://github.com/3h4x/toptal-invoice-web/commit/7e93b8b96d3e6ac3ddab83d2869efea5542b58a5))
+* handling logout ([5dc4e33](https://github.com/3h4x/toptal-invoice-web/commit/5dc4e3359b3f9c0796513ef615513e713a67369c))
+* new design ([3d6f8e9](https://github.com/3h4x/toptal-invoice-web/commit/3d6f8e955e46be35e00d0b6fa0d38ee7f4dbe9c1))
+
+
+
 ## [0.2.1](https://github.com/3h4x/toptal-invoice-web/compare/v0.2.0...v0.2.1) (2022-06-27)
 
 
