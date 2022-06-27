@@ -16,15 +16,15 @@ export const AuthContextProvider = (props: { children: ReactNode }) => {
   const [userAuthToken, setAuthToken] = useState<string | null>(null)
   const [isContextInitialized, setIsContextInitialized] = useState(false)
 
+  const persistToken = (token: string) => {
+    setAuthToken(token)
+    setCookies(AUTH_COOKIE_NAME, token)
+  }
+
   const handleLogout = () => {
     // TODO: add toaster
     setAuthToken(null)
     removeCookies(AUTH_COOKIE_NAME)
-  }
-
-  const persistToken = (token: string) => {
-    setAuthToken(token)
-    setCookies(AUTH_COOKIE_NAME, token)
   }
 
   useEffect(() => {
@@ -46,6 +46,7 @@ export const AuthContextProvider = (props: { children: ReactNode }) => {
   if (!isContextInitialized) {
     // spinner
     console.log('loading')
+    return null
   }
 
   return (
