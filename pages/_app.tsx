@@ -4,8 +4,10 @@ import { blue, teal } from '@mui/material/colors'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 import { AuthContextProvider } from './src/auth/AuthContex'
+import Layout from './src/layout/Layout'
 
 import type { AppProps } from 'next/app'
+import { CssBaseline } from '@mui/material'
 
 const theme = createTheme({
   palette: {
@@ -28,7 +30,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={theme}>
       <AuthContextProvider value={[isAuthenticated, setIsAuthenticated]}>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </AuthContextProvider>
     </ThemeProvider>
   )
