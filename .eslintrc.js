@@ -79,6 +79,12 @@ module.exports = {
             group: 'builtin',
             position: 'before',
           },
+          {
+            pattern: "**/*.css",
+            group: "type",
+            position: 'after',
+          }
+
         ],
         pathGroupsExcludedImportTypes: ['react'],
         'newlines-between': 'always',
