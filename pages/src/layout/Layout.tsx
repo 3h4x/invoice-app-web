@@ -1,3 +1,5 @@
+import { ReactNode } from 'react'
+
 import { Box, Container, CssBaseline } from '@mui/material'
 import Head from 'next/head'
 import { ToastContainer, Slide } from 'react-toastify'
@@ -6,7 +8,7 @@ import Menu from './Menu'
 
 import 'react-toastify/dist/ReactToastify.css'
 
-export default function Layout({ children }) {
+export default function Layout(props: { children: ReactNode }) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -24,7 +26,7 @@ on invoice application'
         <Menu />
         <main>
           <Container sx={{ py: 8 }} maxWidth='md'>
-            {children}
+            {props.children}
           </Container>
         </main>
       </Box>

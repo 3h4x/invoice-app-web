@@ -40,6 +40,7 @@ module.exports = {
     ],
     quotes: ['error', 'single'],
     'react/react-in-jsx-scope': 0,
+    'react-hooks/exhaustive-deps': 0,
     'space-before-function-paren': [
       'error',
       {
@@ -54,13 +55,14 @@ module.exports = {
     'no-underscore-dangle': 0,
     'object-curly-newline': 0,
     'operator-linebreak': 0,
-    curly: 0,
+    'curly': 0,
     'nonblock-statement-body-position': 0,
     'no-plusplus': 0,
     'no-confusing-arrow': 0,
     'react/prop-types': 1,
     '@typescript-eslint/no-empty-interface': 0,
     'no-var': 1,
+    '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/no-var-requires': 1,
     '@typescript-eslint/no-use-before-define': 0,
     'react/jsx-closing-bracket-location': 0,
