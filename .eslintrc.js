@@ -1,3 +1,5 @@
+// eslint config
+
 module.exports = {
   root: true,
   extends: [

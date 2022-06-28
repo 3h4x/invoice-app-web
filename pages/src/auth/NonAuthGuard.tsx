@@ -18,5 +18,5 @@ export const NonAuthGuard = (props: { children: ReactNode }) => {
     return null
   }
 
-  return props.children
+  return <>{props.children}</>
 }
