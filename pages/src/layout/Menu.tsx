@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography'
 
 import { useAuthContext } from '../auth/AuthContex'
 
-const pages = ['Clients', 'Invoices']
+const pages = ['Dashboard', 'Clients', 'Invoices']
 
 export default function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)

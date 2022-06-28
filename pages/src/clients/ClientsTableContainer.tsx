@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
 
+import { toast } from 'react-toastify'
+
 import { fetchClients } from '../api/base'
 import { useAsync } from '../utils/useAsync'
 
@@ -9,6 +11,12 @@ export const ClientsTableContainer = () => {
   const { execute, status, value, error } = useAsync(fetchClients)
 
   useEffect(() => {
+    if (error) {
+      toast.error(`Got unexpected errror: ${error}`)
+    }
+  }, [error])
+
+  useEffect(() => {
     execute(undefined)
   }, [])
 
@@ -16,10 +24,12 @@ export const ClientsTableContainer = () => {
     return <div>Loading</div>
   }
   if (status === 'error') {
-    return <div>Error</div>
+    toast.error('Error while loading clients data.', { theme: 'colored' })
+    return
   }
   if (!value) {
-    return <div>No data</div>
+    toast.warn('No clients data.', { theme: 'colored' })
+    return
   }
 
   return <ClientsTable {...value.data} />
