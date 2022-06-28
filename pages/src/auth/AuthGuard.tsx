@@ -13,7 +13,7 @@ export const AuthGuard = (props: { children: ReactNode }) => {
     if (!userAuthToken) {
       router.push('/login')
     }
-  }, [userAuthToken])
+  }, [userAuthToken, router])
 
   if (!userAuthToken) {
     return null

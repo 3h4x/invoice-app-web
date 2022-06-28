@@ -23,7 +23,7 @@ export default function NavBar() {
     setAnchorElNav(null)
   }
 
-  const { logout } = useAuthContext()
+  const { userAuthToken, logout } = useAuthContext()
 
   return (
     <AppBar position='static'>
@@ -94,16 +94,19 @@ export default function NavBar() {
             Invoicer
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button key={page} onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
-                {page}
-              </Button>
-            ))}
+            {userAuthToken &&
+              pages.map((page) => (
+                <Button key={page} onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
+                  {page}
+                </Button>
+              ))}
           </Box>
 
-          <Button size='large' onClick={() => logout()} color='inherit' variant='outlined'>
-            Logout
-          </Button>
+          {userAuthToken && (
+            <Button size='large' onClick={() => logout()} color='inherit' variant='outlined'>
+              Logout
+            </Button>
+          )}
         </Toolbar>
       </Container>
     </AppBar>

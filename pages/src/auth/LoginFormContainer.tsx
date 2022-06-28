@@ -15,7 +15,7 @@ export default function LoginFormCoitainer() {
     if (loginSuccessValue) {
       setAuthToken(loginSuccessValue.token)
     }
-  }, [loginSuccessValue])
+  }, [loginSuccessValue, setAuthToken])
 
   return <LoginForm onLoginRequest={execute} />
 }

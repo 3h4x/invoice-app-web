@@ -23,8 +23,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   useEffect(() => {
-    console.log(isAuthenticated)
-  }, [isAuthenticated, setIsAuthenticated])
+    console.log(`Logged in: ${isAuthenticated}`)
+  }, [isAuthenticated])
 
   return (
     <ThemeProvider theme={theme}>

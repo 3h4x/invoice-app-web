@@ -32,10 +32,20 @@ const columns: GridColDef[] = [
   { field: 'totalBilled', headerName: 'totalBilled', type: 'number', width: 128 },
 ]
 
+// const ComponentsWithDataTests = {
+//   Row: CustomRow,
+//   Cell: CustomCell,
+// }
+
 export const ClientsTable = (props: ClientsTableProps) => {
   return (
-    <div style={{ height: 400, width: '100%' }}>
-      <DataGrid rows={props.clients} columns={columns} hideFooter />
+    <div style={{ height: 70 * props.clients.length, width: '100%' }}>
+      <DataGrid
+        // components={ComponentsWithDataTests}
+        rows={props.clients}
+        columns={columns}
+        hideFooter
+      />
     </div>
   )
 }
