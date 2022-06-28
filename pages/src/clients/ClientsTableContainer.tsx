@@ -1,14 +1,13 @@
 import { useEffect } from 'react'
 
 import { toast } from 'react-toastify'
-import { JsxElement } from 'typescript'
 
 import { fetchClients } from '../api/base'
 import { useAsync } from '../utils/useAsync'
 
 import { ClientsTable } from './ClientsTable'
 
-export const ClientsTableContainer : JsxElement= () => {
+export const ClientsTableContainer = () => {
   const { execute, status, value, error } = useAsync(fetchClients)
 
   useEffect(() => {
