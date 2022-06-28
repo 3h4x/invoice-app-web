@@ -3,7 +3,7 @@
 import { useCallback, useState } from 'react'
 
 // Will be successful 50% of the time.
-export const useAsync = <T, I, E = string>(asyncFunction: (params: I) => Promise<T>, immediate = true) => {
+export const useAsync = <T, I, E = string>(asyncFunction: (params: I) => Promise<T>) => {
   const [status, setStatus] = useState<'idle' | 'pending' | 'success' | 'error'>('idle')
   const [value, setValue] = useState<T | null>(null)
   const [error, setError] = useState<E | null>(null)
@@ -30,9 +30,3 @@ export const useAsync = <T, I, E = string>(asyncFunction: (params: I) => Promise
   )
   return { execute, status, value, error }
 }
-
-// export type useAsyncClassProps<T, E> = {
-//   asyncFunction: () => Promise<T>
-//   immediate?: boolean
-//   children: (params: UseAsyncClassState<T, E> & { execute: () => Promise<void> }) => React.ReactNode
-// }
