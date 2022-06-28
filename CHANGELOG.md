@@ -39,6 +39,3 @@
 * correctly send form data to the backend ([4bb6da1](https://github.com/3h4x/invoice-app-web/commit/4bb6da16e2438efdb44c29411690a5b991d8a880))
 * data is not displayed to non auth users ([861d24a](https://github.com/3h4x/invoice-app-web/commit/861d24a780a2e87161a0219e51291840a23b27f6))
 * login and logout works with x-auth-token ([c8621c9](https://github.com/3h4x/invoice-app-web/commit/c8621c912dd71ecdb815c00856378947489c192c))
-
-
-
