@@ -4,6 +4,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 Install `pre-commit` and add hook `pre-commit install --hook-type commit-msg`
 
+Husky `npx husky install`
+
 ## Getting Started
 
 First, run the development server:

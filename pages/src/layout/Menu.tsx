@@ -10,9 +10,9 @@ import Typography from '@mui/material/Typography'
 
 import { useAuthContext } from '../auth/AuthContex'
 
-const pages = ['Clients', 'Invoices']
+const pages = ['Dashboard', 'Clients', 'Invoices']
 
-export default function PrimarySearchAppBar() {
+export default function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -83,8 +83,6 @@ export default function PrimarySearchAppBar() {
           <Typography
             variant='h5'
             noWrap
-            component='a'
-            href=''
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },

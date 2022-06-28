@@ -1,9 +1,14 @@
 import { Component, ReactNode } from 'react'
 
+import { toast } from 'react-toastify'
+
 export class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
   state = { hasError: false }
 
   static getDerivedStateFromError(error: unknown) {
+    if (error) {
+      toast.error(`Error out of bounds: ${error}`)
+    }
     return { hasError: true }
   }
 
