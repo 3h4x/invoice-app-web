@@ -21,6 +21,7 @@ export const ClientsTableContainer = () => {
   }, [execute])
 
   if (status === 'idle' || status === 'pending') {
+    // TODO: spinner
     return <div>Loading</div>
   }
   if (status === 'error') {

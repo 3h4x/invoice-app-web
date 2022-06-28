@@ -12,7 +12,7 @@ export default function Layout(props: { children: ReactNode }) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <ToastContainer limit={3} transition={Slide} />
+      <ToastContainer limit={3} transition={Slide} autoClose={3000} newestOnTop />
 
       <Head>
         <title>Awesome Invoice App</title>

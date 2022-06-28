@@ -18,16 +18,9 @@ const theme = createTheme({
 })
 
 function MyApp({ Component, pageProps }: AppProps) {
-  // const [isAuthenticated, setIsAuthenticated] = useState(false)
-
-  // useEffect(() => {
-  //   console.log(`Logged in: ${isAuthenticated}`)
-  // }, [isAuthenticated])
-
   return (
     <ThemeProvider theme={theme}>
       <AuthContextProvider>
-        {/* value={[isAuthenticated, setIsAuthenticated]}> */}
         <Layout>
           <Component {...pageProps} />
         </Layout>
