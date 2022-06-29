@@ -1,5 +1,4 @@
 import { AuthGuard } from './src/auth/AuthGuard'
-import { ClientsTableContainer } from './src/clients/ClientsTableContainer'
 
 import type { NextPage } from 'next'
 
