@@ -1,3 +1,19 @@
+# [0.5.0](https://github.com/3h4x/invoice-app-web/compare/v0.4.0...v0.5.0) (2022-06-29)
+
+
+### Bug Fixes
+
+* remove wrong JSXElement ([13316db](https://github.com/3h4x/invoice-app-web/commit/13316db1bbc3c8cb2637157a62d2c8c285edf8e8))
+
+
+### Features
+
+* authguards updated ([33fd80b](https://github.com/3h4x/invoice-app-web/commit/33fd80b3bfdd6a20c128459b218496d062c5d797))
+* better toaster for login ([9319548](https://github.com/3h4x/invoice-app-web/commit/93195488e1457d79a0f961f5a8ad30f68aeb443f))
+* passing params for clients ([ea522e0](https://github.com/3h4x/invoice-app-web/commit/ea522e09984f938a6e73d85e6bb2fb6b6685e986))
+
+
+
 # [0.4.0](https://github.com/3h4x/invoice-app-web/compare/v0.3.0...v0.4.0) (2022-06-28)
 
 
@@ -39,3 +55,6 @@
 * correctly send form data to the backend ([4bb6da1](https://github.com/3h4x/invoice-app-web/commit/4bb6da16e2438efdb44c29411690a5b991d8a880))
 * data is not displayed to non auth users ([861d24a](https://github.com/3h4x/invoice-app-web/commit/861d24a780a2e87161a0219e51291840a23b27f6))
 * login and logout works with x-auth-token ([c8621c9](https://github.com/3h4x/invoice-app-web/commit/c8621c912dd71ecdb815c00856378947489c192c))
+
+
+
