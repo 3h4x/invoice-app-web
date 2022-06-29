@@ -19,7 +19,6 @@ const Clients: NextPage = () => {
 
   useEffect(() => {
     if (router.isReady && router.query) {
-      console.log(router.query)
       const page = parseInt(
         router.query.page ? (Array.isArray(router.query.page) ? router.query.page[0] : router.query.page) : '1',
         10,
@@ -36,6 +35,7 @@ const Clients: NextPage = () => {
           ? router.query.sort[0]
           : router.query.sort
         : 'ASC'
+
       setQueryParams({
         page,
         sort,
@@ -43,9 +43,7 @@ const Clients: NextPage = () => {
         initialised: true,
       })
     }
-  }, [router.isReady, router.query])
-
-  console.log(queryParams)
+  }, [router.isReady, router.query.page, router.query.sort, router.query.sortBy])
 
   if (!queryParams.initialised) {
     // TODO: spinner
@@ -54,7 +52,29 @@ const Clients: NextPage = () => {
 
   return (
     <AuthGuard>
-      <ClientsTableContainer />
+      <ClientsTableContainer
+        {...queryParams}
+        sortModel={
+          queryParams.sortBy
+            ? [
+                {
+                  field: queryParams.sortBy,
+                  sort: queryParams.sort.toLocaleLowerCase() as 'asc' | 'desc',
+                },
+              ]
+            : []
+        }
+        onSortModelChange={(models) => {
+          console.log(models)
+          const { initialised, ...rest } = queryParams
+          if (models.length === 0) {
+            const { sortBy, ...ninjaSort } = queryParams
+            router.push({ pathname: '/clients', query: { ...ninjaSort, sort: 'asc' } })
+            return
+          }
+          router.push({ pathname: '/clients', query: { ...rest, sortBy: models[0].field, sort: models[0].sort } })
+        }}
+      />
     </AuthGuard>
   )
 }
