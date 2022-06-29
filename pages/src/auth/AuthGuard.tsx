@@ -11,13 +11,13 @@ export const AuthGuard = (props: { children: ReactNode }) => {
 
   useEffect(() => {
     if (!userAuthToken) {
-      router.push('/login')
+      router.push({ pathname: '/login' })
     }
-  }, [userAuthToken])
+  }, [userAuthToken, router])
 
   if (!userAuthToken) {
     return null
   }
 
-  return props.children
+  return <>{props.children}</>
 }

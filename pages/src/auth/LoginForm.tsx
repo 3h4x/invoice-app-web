@@ -1,9 +1,7 @@
 import * as React from 'react'
 
 import { yupResolver } from '@hookform/resolvers/yup'
-import LockIcon from '@mui/icons-material/Lock'
 import { Container } from '@mui/material'
-import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Checkbox from '@mui/material/Checkbox'
@@ -38,9 +36,6 @@ export const LoginForm = (props: LoginFormProps) => {
   return (
     <>
       <Container component='main' maxWidth='xs'>
-        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-          <LockIcon />
-        </Avatar>
         <Typography component='h1' variant='h5'>
           Sign in
         </Typography>

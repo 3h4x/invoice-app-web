@@ -1,4 +1,15 @@
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid'
+import React from 'react'
+
+import {
+  DataGrid,
+  GridCell,
+  GridCellProps,
+  GridColDef,
+  GridRow,
+  GridRowProps,
+  GridSortModel,
+  GridValueGetterParams,
+} from '@mui/x-data-grid'
 
 type ClientsTableProps = {
   clients: Array<{
@@ -16,6 +27,11 @@ type ClientsTableProps = {
     user_id: string
   }>
   total: number
+} & SortingProps
+
+export type SortingProps = {
+  sortModel?: GridSortModel
+  onSortModelChange?: (sortModel: GridSortModel) => void
 }
 
 const columns: GridColDef[] = [
@@ -32,10 +48,32 @@ const columns: GridColDef[] = [
   { field: 'totalBilled', headerName: 'totalBilled', type: 'number', width: 128 },
 ]
 
+export const CustomRow = (props: React.HTMLAttributes<HTMLDivElement> & GridRowProps) => {
+  return <GridRow data-test={`client-id-${props.row.id}`} {...props} />
+}
+
+export const CustomCell = (props: GridCellProps) => {
+  return <GridCell data-test={`client-id-${props.field}`} {...props} />
+}
+
+const ComponentsWithDataTests = {
+  Row: CustomRow,
+  Cell: CustomCell,
+}
+
 export const ClientsTable = (props: ClientsTableProps) => {
+  const { clients, total, ...rest } = props
   return (
-    <div style={{ height: 400, width: '100%' }}>
-      <DataGrid rows={props.clients} columns={columns} hideFooter />
+    <div style={{ height: 70 * props.clients.length, width: '100%' }}>
+      <DataGrid
+        components={ComponentsWithDataTests}
+        rows={props.clients}
+        columns={columns}
+        sortModel={[]}
+        onSortModelChange={(sortModel) => console.log(sortModel)}
+        hideFooter
+        {...rest}
+      />
     </div>
   )
 }

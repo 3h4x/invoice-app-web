@@ -1,3 +1,5 @@
+// eslint config
+
 module.exports = {
   root: true,
   extends: [
@@ -40,7 +42,6 @@ module.exports = {
     ],
     quotes: ['error', 'single'],
     'react/react-in-jsx-scope': 0,
-    'react-hooks/exhaustive-deps': 0,
     'space-before-function-paren': [
       'error',
       {
