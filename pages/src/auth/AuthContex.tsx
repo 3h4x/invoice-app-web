@@ -56,12 +56,6 @@ export const AuthContextProvider = (props: { children: ReactNode }) => {
     return null
   }
 
-  if (!isContextInitialized) {
-    // spinner
-    console.log('loading')
-    return null
-  }
-
   return <AuthContext.Provider value={contextValue}>{props.children}</AuthContext.Provider>
 }
 
