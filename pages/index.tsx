@@ -6,7 +6,9 @@ import type { NextPage } from 'next'
 const Home: NextPage = () => {
   return (
     <AuthGuard>
+      {/* <ErrorBoundary scope='clients' errrorComponent={<div>Error</div>}> */}
       <ClientsTableContainer />
+      {/* </ErrorBoundary> */}
     </AuthGuard>
   )
 }

@@ -5,10 +5,22 @@ import { toast } from 'react-toastify'
 import { fetchClients } from '../api/base'
 import { useAsync } from '../utils/useAsync'
 
-import { ClientsTable } from './ClientsTable'
+import { ClientsTable, SortingProps } from './ClientsTable'
 
-export const ClientsTableContainer = () => {
+export type ClientsTableContainerProps = {
+  page: number
+  sort: string
+  sortBy: string | null
+} & SortingProps
+
+export const ClientsTableContainer = (props: ClientsTableContainerProps) => {
   const { execute, status, value, error } = useAsync(fetchClients)
+  const { page = 1, sort = 'ASC', sortBy = null, ...rest } = props
+
+  useEffect(() => {
+    execute({ page, sort, sortBy })
+    console.log({ page, sort, sortBy })
+  }, [execute, page, sort, sortBy])
 
   useEffect(() => {
     if (error) {
@@ -35,7 +47,14 @@ export const ClientsTableContainer = () => {
 
   return (
     <>
-      <ClientsTable clients={[]} total={0} {...value.data} />
+      <ClientsTable
+        onSortModelChange={(models) => {
+          console.log(models)
+        }}
+        sortModel={[]}
+        {...value.data}
+        {...rest}
+      />
     </>
   )
 }
