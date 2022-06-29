@@ -7,7 +7,7 @@ const Home: NextPage = () => {
   return (
     <AuthGuard>
       {/* <ErrorBoundary scope='clients' errrorComponent={<div>Error</div>}> */}
-      <ClientsTableContainer />
+      {/* <ClientsTableContainer /> */}
       {/* </ErrorBoundary> */}
     </AuthGuard>
   )

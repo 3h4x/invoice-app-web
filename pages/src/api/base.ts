@@ -1,4 +1,5 @@
 import axios, { AxiosError } from 'axios'
+import { toast } from 'react-toastify'
 
 export const backendAPI = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_BACKEND_URL}`,
@@ -27,8 +28,16 @@ type ClientsAPIResponse = {
   }
 }
 
-export const fetchClients = async () => {
-  return await backendAPI.get<ClientsAPIResponse>('/clients')
+export const fetchClients = async (params: { page: number; sort: string; sortBy: string | null }) => {
+  const queryObject = params.sortBy
+    ? {
+        page: params.page,
+        sort: {
+          [params.sortBy]: params.sort.toString(),
+        },
+      }
+    : { page: params.page }
+  return await backendAPI.get<ClientsAPIResponse>(`/clients?params=${JSON.stringify(queryObject)}`)
 }
 
 type UserAPILoginResponse = {
@@ -48,7 +57,11 @@ type UserAPILoginResponse = {
 }
 
 export const UserAPI = {
-  setupAPIToken: (token: string, handleTokenExpired: () => unknown) => {
+  _requestRef: NaN,
+  _responseRef: NaN,
+
+  setupAPIToken(token: string, handleTokenExpired: () => unknown) {
+    backendAPI.interceptors.request.eject(this._requestRef)
     backendAPI.interceptors.request.use((req) => {
       if (!req.headers) {
         req.headers = {}
@@ -57,12 +70,15 @@ export const UserAPI = {
       return req
     })
 
-    backendAPI.interceptors.response.use(
+    backendAPI.interceptors.response.eject(this._responseRef)
+
+    this._responseRef = backendAPI.interceptors.response.use(
       (res) => {
         return res
       },
       (err) => {
-        if (err instanceof AxiosError && err.response?.data === 'Invalid token') {
+        if (err instanceof AxiosError && err.response?.data === 'Invalid Token') {
+          toast.warn('Your session has expired. Please login again.')
           handleTokenExpired()
         }
       },
