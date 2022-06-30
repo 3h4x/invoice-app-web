@@ -126,7 +126,7 @@ export const InvoiceForm = (props: InvoiceCreateProps) => {
               <Alert severity='error'>Please add at least one item</Alert>
             ) : null}
             {items.map((item, index) => (
-              <Box key={index} sx={{ padding: 3, mb: 2, }}>
+              <Box key={index} sx={{ padding: 3, mb: 2 }}>
                 <TextField
                   margin='dense'
                   size='small'
