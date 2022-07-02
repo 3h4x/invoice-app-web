@@ -6,3 +6,6 @@ documentation:
 
 api:
   - "pages/api/*"
+
+tests:
+  - "**/*.test.*"
