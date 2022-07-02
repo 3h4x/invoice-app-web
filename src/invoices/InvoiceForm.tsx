@@ -16,7 +16,7 @@ type InvoiceItemSchema = yup.InferType<typeof InvoiceItemSchema>
 const InvoiceFormSchema = yup.object({
   number: yup.number().required(),
   projectCode: yup.string(),
-  companyId: yup.string().required(),
+  // companyId: yup.string().required(),
   items: yup.array().of(InvoiceItemSchema).required().min(1),
 })
 
@@ -57,7 +57,7 @@ export const InvoiceForm = (props: InvoiceCreateProps) => {
     <Container component='main' maxWidth='md'>
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         {props.genericError ? <Alert severity='error'>{props.genericError}</Alert> : null}
-        <Box component='form' onSubmit={handleSubmit(props.onInvoiceSubmitRequest)} sx={{ mt: 1 }}>
+        <Box component='form' onSubmit={handleSubmit(props.onInvoiceSubmitRequest)} noValidate sx={{ mt: 1 }}>
           <Box sx={{ padding: 3, mb: 2, border: '1px solid #e0e0e0', borderRadius: 4 }}>
             <Typography variant='h5'>Main Details</Typography>
             <Grid container spacing={2}>

@@ -37,7 +37,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     ? Array.isArray(context.query.print)
       ? context.query.print[0]
       : context.query.print
-    : false
+    : null
 
   if (!id) {
     return {
