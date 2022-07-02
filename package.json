@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "type-check": "tsc"
+    "type-check": "tsc",
+    "cypress": "cypress open"
   },
   "dependencies": {
     "@emotion/react": "^11.9.3",
@@ -36,6 +37,7 @@
     "@types/node": "18.0.0",
     "@types/react": "18.0.14",
     "@types/react-dom": "18.0.5",
+    "cypress": "^10.3.0",
     "eslint": "8.18.0",
     "eslint-config-next": "12.1.6",
     "eslint-config-prettier": "^8.5.0",

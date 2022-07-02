@@ -10,7 +10,8 @@ api:
 
 tests:
   - "**/*.test.*"
-  - "cypress/**"
+  - "cypress/**/*"
+  - "jest*.js"
 
 invoices:
   - "pages/invoices/*"
