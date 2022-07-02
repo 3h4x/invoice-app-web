@@ -5,6 +5,22 @@ context('Login', () => {
     cy.visit('http://localhost:3000')
   })
 
+  it('fill invalid email', () => {
+    cy.get('[data-test=email]')
+     .type('invalid-email')
+    cy.get('[data-test=password]')
+      .type('password{enter}')
+
+    cy.get('[data-test=email-error]')
+    .should('be.visible')
+
+    cy.get('[data-test=email]')
+      .clear()
+
+    cy.get('[data-test=password-error]')
+    .should('be.not.visible')
+  })
+
   it('fill invalid user credentials', () => {
     cy.get('[data-test=email]')
       .type('invalid@email.com').should('have.value', 'invalid@email.com')
@@ -16,6 +32,22 @@ context('Login', () => {
       .should('be.visible')
       .should('contain', 'Login error: Invalid Credentials')
 
+    cy.location('pathname').should('eq', '/login')
+  })
+
+  it('fill valid user credentials', () => {
+    cy.get('[data-test=email]')
+      .type('fake_user1@officehourtesting.com')
+      .should('have.value', 'fake_user1@officehourtesting.com')
+    cy.get('[data-test=password]')
+      .type('123456').should('have.value', '123456')
+      .type('{enter}')
+
+    cy.get('.Toastify__toast-body')
+      .should('be.visible')
+      .should('contain', 'Logged in!')
+
+    cy.location('pathname').should('eq', '/')
   })
 
   it('cy.reload() - reload the page', () => {
@@ -64,8 +96,6 @@ context('Login', () => {
       // Delay each keypress by 0.1 sec
       .type('slow-typing-invalid-password', { delay: 100 })
       .should('have.value', 'slow-typing-invalid-password')
-
-
   })
 
   it('cy.reload() - reload the page', () => {
