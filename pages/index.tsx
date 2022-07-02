@@ -1,4 +1,4 @@
-import { AuthGuard } from './src/auth/AuthGuard'
+import { AuthGuard } from '../src/auth/AuthGuard'
 
 import type { NextPage } from 'next'
 

@@ -1,8 +1,8 @@
 import { blue, teal } from '@mui/material/colors'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 
-import { AuthContextProvider } from './src/auth/AuthContex'
-import Layout from './src/layout/Layout'
+import { AuthContextProvider } from '../src/auth/AuthContex'
+import Layout from '../src/layout/Layout'
 
 import type { AppProps } from 'next/app'
 
