@@ -50,6 +50,3 @@
 ### Reverts
 
 * Revert "Layout, design and more auth (#3)" ([3b6e11e](https://github.com/3h4x/invoice-app-web/commit/3b6e11e53dbe403d9a47ffe8bd11427204d06d11)), closes [#3](https://github.com/3h4x/invoice-app-web/issues/3)
-
-
-
