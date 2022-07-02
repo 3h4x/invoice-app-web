@@ -6,6 +6,26 @@ documentation:
 
 api:
   - "pages/api/*"
+  - "src/api/*"
 
 tests:
   - "**/*.test.*"
+  - "cypress/**"
+
+invoices:
+  - "pages/invoices/*"
+  - "src/invoices/*"
+
+auth:
+  - "pages/login.tsx"
+  - "src/auth/*"
+
+layout:
+  - "src/layout/*"
+
+utils:
+  - "src/utils/*"
+
+clients:
+  - "pages/clients.tsx"
+  - "src/clients/*"
