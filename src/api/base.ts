@@ -8,27 +8,33 @@ export const backendAPI = axios.create({
   },
 })
 
-type ClientsAPIResponse = {
-  data: {
-    clients: Array<{
-      companyDetails: {
-        name: string
-        address: string
-        regNumber: string
-        vatNumber: string
-      }
-      email: string
-      id: string
-      invoicesCount: number
-      name: string
-      totalBilled: number
-      user_id: string
-    }>
-    total: number
+export interface ClientsDataType {
+  companyDetails: {
+    name: string
+    address: string
+    regNumber: string
+    vatNumber: string
   }
+  email: string
+  id: string
+  invoicesCount: number
+  name: string
+  totalBilled: number
+  user_id: string
 }
 
-export const fetchClients = async (params: { page: number; sort: string; sortBy: string | null }) => {
+type ClientsAPIResponse = {
+  clients: Array<ClientsDataType>
+  total: number
+}
+
+export type FetchClientParams = {
+  page: number
+  sort: string
+  sortBy: string | null
+}
+
+export const fetchClients = async (params: FetchClientParams) => {
   const queryObject = params.sortBy
     ? {
         page: params.page,

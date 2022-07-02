@@ -2,9 +2,7 @@ import { useEffect } from 'react'
 
 import { toast } from 'react-toastify'
 
-import { fetchClients } from '../api/base'
-import { useAsync } from '../utils/useAsync'
-
+import { useClientsStore } from './ClientsStore'
 import { ClientsTable, SortingProps } from './ClientsTable'
 
 export type ClientsTableContainerProps = {
@@ -14,13 +12,15 @@ export type ClientsTableContainerProps = {
 } & SortingProps
 
 export const ClientsTableContainer = (props: ClientsTableContainerProps) => {
-  const { execute, status, value, error } = useAsync(fetchClients)
   const { page = 1, sort = 'ASC', sortBy = null, ...rest } = props
+  const { clients, total, fetchStatus, error } = useClientsStore((state) => state.clientsList)
+  const fetchClientsList = useClientsStore((state) => state.fetchClientsList)
+
+  console.log(clients)
 
   useEffect(() => {
-    execute({ page, sort, sortBy })
-    console.log({ page, sort, sortBy })
-  }, [execute, page, sort, sortBy])
+    fetchClientsList({ page, sort, sortBy })
+  }, [fetchClientsList, page, sort, sortBy])
 
   useEffect(() => {
     if (error) {
@@ -28,33 +28,22 @@ export const ClientsTableContainer = (props: ClientsTableContainerProps) => {
     }
   }, [error])
 
-  useEffect(() => {
-    execute(undefined)
-  }, [execute])
-
-  if (status === 'idle' || status === 'pending') {
+  if (fetchStatus === 'idle' || fetchStatus === 'pending') {
     // TODO: spinner
     return <div>Loading</div>
   }
-  if (status === 'error') {
+  if (fetchStatus === 'error') {
     toast.error('Error while loading clients data.', { theme: 'colored' })
     return
   }
-  if (!value) {
+  if (!clients || !total) {
     toast.warn('No clients data.', { theme: 'colored' })
     return
   }
 
   return (
     <>
-      <ClientsTable
-        onSortModelChange={(models) => {
-          console.log(models)
-        }}
-        sortModel={[]}
-        {...value.data}
-        {...rest}
-      />
+      <ClientsTable clients={clients} total={total} sortModel={[]} {...rest} />
     </>
   )
 }
