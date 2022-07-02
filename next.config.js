@@ -4,6 +4,11 @@ const nextConfig = {
   eslint: {
     dirs: ['pages', 'src'],
   },
+  compiler: {
+    reactRemoveProperties: {
+      properties: ['^data-test'],
+    }
+  }
 
 }
 
